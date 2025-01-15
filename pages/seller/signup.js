@@ -10,6 +10,7 @@ const signup = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [img, setImg] = useState('');
     const router = useRouter();
 
     useEffect(() => {
@@ -34,12 +35,15 @@ const signup = () => {
         if (e.target.name === "password") {
             setPassword(e.target.value);
         }
+        if (e.target.name === "img") {
+            setImg(e.target.value);
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const data = { name, address, email, phone, password };
+        const data = { name, address, email, phone, password, image: img };
 
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/sellersignup`, {
@@ -59,6 +63,7 @@ const signup = () => {
             setEmail("");
             setPhone("");
             setPassword("");
+            setImg("");
 
             toast.success(response.success, {
                 position: "top-right",
@@ -131,6 +136,13 @@ const signup = () => {
                         <label for="password" className="block font-medium text-gray-900">Password</label>
                         <div className="mt-2">
                             <input value={password} onChange={handleChange} type="password" name="password" id="password" autoComplete="current-password" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-orange-500 sm:text-sm/6" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="email" className="block font-medium text-gray-900">Image Url</label>
+                        <div className="mt-2">
+                            <input value={img} onChange={handleChange} type="img" name="img" id="img" autoComplete="img" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-orange-500 sm:text-sm/6" />
                         </div>
                     </div>
 

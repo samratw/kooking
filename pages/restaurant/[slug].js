@@ -72,7 +72,9 @@ const Restaurant = ({ restaurant, items }) => {
                             <tbody>
                                 {items.map((item) => (
                                     <tr key={item._id} className="bg-white border-b border-gray-700 text-lg">
-                                        <td className="p-3 font-medium whitespace-nowrap">{item.name}</td>
+                                        <td className="p-3 font-medium whitespace-nowrap">{item.name}
+                                            <div className="text-sm text-gray-500">{item.desc}</div>
+                                        </td>
                                         <td className="p-3">
                                             Rs.{item.price * Math.max(quantities[item._id], 1)}
                                         </td>

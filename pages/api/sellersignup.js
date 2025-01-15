@@ -3,13 +3,13 @@ import connectDb from "../../middleware/mongoose";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { name, address, email, phone, password } = req.body;
+    const { name, address, email, phone, password, image } = req.body;
     const user = await Seller.findOne({ email });
     if (user) {
       return res.status(401).json({ error: "Already in use." });
     }
     else {
-      let u = new Seller({ name, address, email, phone, password })
+      let u = new Seller({ name, address, email, phone, password, image });
       await u.save();
 
       return res.status(200).json({ success: "Successful." });
