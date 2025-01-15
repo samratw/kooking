@@ -9,7 +9,7 @@ const handler = async (req, res) => {
       return res.status(401).json({ error: "Already in use." });
     }
     else {
-      let u = new Seller({ name, address, email, phone, password, image });
+      let u = new Seller({ name, address, email, phone, password, image, likes: 0 });
       await u.save();
 
       return res.status(200).json({ success: "Successful." });

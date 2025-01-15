@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-//import Footer from '../components/Footer';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import '../styles/globals.css';
 
@@ -59,7 +59,7 @@ function MyApp({ Component, pageProps }) {
   return <>
     {key && <Navbar key={key} user={user} logout={logout} logOut={logOut} cart={cart} clearCart={clearCart} />}
     <Component addToCart={addToCart} cart={cart} clearCart={clearCart} {...pageProps} />
-    {/*<Footer />*/}
+    <Footer />
   </>
 }
 
