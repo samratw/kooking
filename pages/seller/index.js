@@ -40,30 +40,6 @@ export default function Home() {
             title: "Noodles",
             qty: 5,
             price: 500
-        },
-        {
-            id: 6,
-            title: "Biryani",
-            qty: 6,
-            price: 600
-        },
-        {
-            id: 7,
-            title: "Sandwich",
-            qty: 7,
-            price: 700
-        },
-        {
-            id: 8,
-            title: "Fries",
-            qty: 8,
-            price: 800
-        },
-        {
-            id: 9,
-            title: "Pasta",
-            qty: 9,
-            price: 900
         }
     ];
 
