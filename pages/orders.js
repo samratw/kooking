@@ -8,28 +8,22 @@ const Orders = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      try {
-        const user = localStorage.getItem('seller');
-        if (!user) {
-          router.push('/seller/login');
-          return;
-        }
-
-        const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/sellerorders`, {
+      let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/orders`,
+        {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token: JSON.parse(user).token }),
-        });
-
-        const result = await response.json();
-        setOrders(result.orders);
-      } catch (error) {
-        console.error('Error fetching orders:', error);
-      }
-    };
-
-    fetchOrders();
-  }, [router]);
+          headers: { 'Content-Type': 'application/json', },
+          body: JSON.stringify({ token: JSON.parse(localStorage.getItem('user')).token }),
+        })
+      let res = await a.json()
+      setOrders(res.orders)
+    }
+    if (!localStorage.getItem("user")) {
+      router.push("/");
+    }
+    else {
+      fetchOrders();
+    }
+  }, [])
 
   return (
     <div className="container min-h-screen mx-auto">
@@ -49,12 +43,8 @@ const Orders = () => {
                 <tbody>
                   {orders.length > 0 ? (
                     orders.map((order) => (
-                      <tr key={order._id} className="border-b border-gray-300 hover:bg-gray-100 cursor-pointer">
-                        <td className="px-6 py-4">
-                          <Link href={`/seller/order?id=${order._id}`}>
-                            #{order._id}
-                          </Link>
-                        </td>
+                      <tr key={order._id} className="border-b border-gray-300">
+                        <td className="px-6 py-4">#{order._id}</td>
                         <td className="px-6 py-4">Rs. {order.total}</td>
                         <td className="px-6 py-4">{order.status}</td>
                       </tr>
@@ -72,6 +62,6 @@ const Orders = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Orders;

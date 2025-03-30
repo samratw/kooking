@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const ItemSchema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true },
     name: { type: String, required: true },
     category: { type: String, required: true },
     desc: { type: String, required: true },

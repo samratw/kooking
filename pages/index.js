@@ -9,6 +9,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa6";
 import Seller from "../models/Seller";
 import mongoose from "mongoose";
+import Image from "next/image";
 
 export default function Home({ restaurants }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -67,13 +68,10 @@ export default function Home({ restaurants }) {
 
   return (
     <div>
-      <section className="relative flex flex-col bg-green-600 p-3 justify-center items-center rounded-t">
-        <p className="text-orange-500 text-2xl lg:text-6xl font-bold py-4">KooKing</p>
-        <p className="text-white text-x1 lg:text-4xl font-semibold">Bringing Flavor To Your Door</p>
-      </section>
+        <p className="relative flex flex-col bg-white py-8 justify-center items-center text-orange-500 text-x1 lg:text-4xl font-semibold">Bringing Flavor To Your Door</p>
 
-      <section className="p-2 border-b-2 border-orange-500 rounded-b">
-        <p className="text-2xl text-center font-bold py-4">Top Food's</p>
+      <section className="bg-green-500 p-3">
+        <p className="text-white text-2xl text-center font-bold py-5">TOP FOOD'S</p>
         <ul>
           <Swiper
             pagination={{ type: "bullets", clickable: true }}
@@ -84,9 +82,10 @@ export default function Home({ restaurants }) {
             {TopFoods.map((index) => (
               <SwiperSlide key={index.id}>
                 <div className="mb-8 flex flex-col justify-center items-center">
-                  <img
-                    src={index.image}
-                    className="w-[20rem] h-[20rem] rounded-xl object-cover object-center"
+                  <Image
+                    src={index.image} width={300} height={300}
+                    alt={index.title}
+                    className="w-[25rem] h-[25rem] rounded-xl object-cover object-center"
                   />
                 </div>
               </SwiperSlide>
@@ -96,28 +95,19 @@ export default function Home({ restaurants }) {
       </section>
 
       <section>
-        <div className="container my-28 mx-auto">
-          <div className="flex flex-col text-center text-2xl font-bold title-font text-gray-900">RESTAURANT'S</div>
-          <div className="flex m-6 items-center lg:text-lg w-1/2">
-            <IoSearchSharp className="z-10 -mr-8 text-2xl cursor-pointer" />
-            <input
-              type="search"
-              id="search"
-              placeholder="Find Restaurant's..."
-              className="block md:block w-full border border-gray-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-400 rounded-lg p-3 pl-8 shadow-sm text-gray-700 focus:outline-none transition duration-150 ease-in-out"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
+        <div className="container mt-[8rem] mx-auto">
+          <div className="mb-[2rem] flex flex-col text-center text-2xl font-bold title-font text-gray-900">FEATURED RESTAURANT'S</div>
           <div className="flex flex-wrap">
             {filteredRestaurants.map((index) => (
               <Link passHref={true} key={index._id} href={`/restaurant/${index.name}?id=${index._id}`} legacyBehavior>
                 <div className="p-4 lg:w-1/4 md:w-1/2 cursor-pointer">
                   <div className="flex flex-col p-2 items-center text-center border border-gray-500 rounded">
-                    <img
-                      alt="restaurant"
-                      className="flex-shrink-0 rounded w-full h-52 object-cover object-center border-b border-black"
+                    <Image
                       src={index.image}
+                      width={300}
+                      height={300}
+                      alt="restaurant"
+                      className="flex-shrink-0 rounded w-full h-52 object-cover object-center p-2 border-b border-black"
                     />
                     <h2 className="m-2 title-font font-semibold text-lg text-gray-900">
                       {index.name} - {index.address}
