@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import moment from 'moment';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -42,6 +43,7 @@ const Orders = () => {
                 <thead className="bg-gray-200">
                   <tr>
                     <th className="px-6 py-3">Order ID</th>
+                    <th className="px-6 py-3">Date</th>
                     <th className="px-6 py-3">Total</th>
                     <th className="px-6 py-3">Status</th>
                   </tr>
@@ -54,6 +56,7 @@ const Orders = () => {
                           <Link href={`/seller/order?id=${order._id}`}>
                             #{order._id}
                           </Link>
+                          <td className="px-6 py-4">{moment(order.createdAt).format('DD/MM/YYYY')}</td>
                         </td>
                         <td className="px-6 py-4">Rs. {order.total}</td>
                         <td className="px-6 py-4">{order.status}</td>
