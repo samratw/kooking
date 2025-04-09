@@ -22,4 +22,4 @@ const success = () => {
   )
 }
 
-export default success
+export default success;
